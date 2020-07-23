@@ -7,12 +7,14 @@ import QuestionCards from './Components/QuestionCards';
 function App() {
   const [quiz, setQuiz]= useState<QuizType[]>([])
   let [currentQuestion, setCurrentQuestion]= useState(0)
-  let [score, setScore]=useState(0)
+  let [score, setScore]=useState(0);
+  const [result, setResult]= useState(false);
+  let [percent, setPercent]= useState(0);
 
   
   useEffect(()=>{
     async function getQuestions(){
-      const questions: QuizType[] = await getQuizQuestion(3, 'easy')
+      const questions: QuizType[] = await getQuizQuestion(5, 'easy')
       setQuiz(questions)
     }
     getQuestions()
@@ -29,23 +31,34 @@ function App() {
     if(currentQuestion !== quiz.length-1)
       setCurrentQuestion(++currentQuestion);
     else {
-      alert("Your score is "+ score + " out of "+ quiz.length);
-      setCurrentQuestion(0);
-      setScore(0);
+      setResult(true)
+      setPercent((score/quiz.length)*100)
     }
 
     }
-
-  
-  if(!quiz.length)
-   return <h3>Loading...</h3>
+if(!quiz.length){
+  return <h3>Loading...</h3>
+}
+if(result){
+  return(
+    <div className="resultCard">
+    <h3>Result</h3>
+    <p>Your score is {score} out of {quiz.length}</p>
+    <p>{percent>=33?"Congratulations! You have Passed with " + percent.toFixed(2) + "% marks": "You are failed"}</p>
+      <a className="reStart" href="">Re-Start Quiz</a>
+    
+    </div>
+  )
+}
+   
   return (
     <div>
-      {console.log(quiz[currentQuestion].answer)}
+      {/* {console.log(quiz[currentQuestion].answer)} */}
         <QuestionCards 
           options={quiz[currentQuestion].option}
           question={quiz[currentQuestion].question}
           callback={handleSubmit}
+          
         />
     </div>
   );

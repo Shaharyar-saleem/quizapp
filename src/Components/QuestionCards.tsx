@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {QuestionPropsType} from '../Types/quiz_types';
+import '../App.css';
 
 
 const QuestionCards:React.FC<QuestionPropsType> = ({options, question, callback}) => {
@@ -10,9 +11,9 @@ const QuestionCards:React.FC<QuestionPropsType> = ({options, question, callback}
     }
    return(
        <div>
+           <h3 className="quiz_title">Online Quiz</h3>
            <div className="question_container">
-               <h4>{question}</h4>
-           </div>
+               <h4 className="question">{question}</h4>
            <form onSubmit={(e:React.FormEvent<EventTarget>)=>callback(e, selectedAns)}>
                {options.map((option: string, index: number)=>{
                    return(
@@ -23,8 +24,9 @@ const QuestionCards:React.FC<QuestionPropsType> = ({options, question, callback}
                        </div>
                    )
                })}
-               <input type="submit"/>
+               <input type="submit" value="Next"/>
            </form>
+           </div>
        </div>
    )
 }
