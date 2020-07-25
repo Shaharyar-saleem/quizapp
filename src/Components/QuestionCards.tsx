@@ -13,7 +13,7 @@ const QuestionCards:React.FC<QuestionPropsType> = ({options, question, callback}
        <div>
            <h3 className="quiz_title">Online Quiz</h3>
            <div className="question_container">
-               <h4 className="question">{question}</h4>
+               <h4 className="question">{question.replace(/&quot;/g,'"')}</h4>
            <form onSubmit={(e:React.FormEvent<EventTarget>)=>callback(e, selectedAns)}>
                {options.map((option: string, index: number)=>{
                    return(
