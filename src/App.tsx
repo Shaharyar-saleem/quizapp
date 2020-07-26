@@ -59,7 +59,7 @@ if(result){
     <p>Your score is {score} out of {quiz.length}</p>
     <p>{percent>=40?"Congratulations! You have Passed with " + percent.toFixed(2) + "% marks": "You are failed"}</p>
       {PieChart}
-      <a className="reStart" href="">Re-Start Quiz</a>
+      <a className="reStart">Re-Start Quiz</a>
     </div>
   )
 }
